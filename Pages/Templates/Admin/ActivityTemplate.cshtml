@@ -1,0 +1,28 @@
+﻿<li class="ActivityWrapper">
+    <div class="Activity ScrollingTextContainer" PosX="@Model.Activity.PointX" PosY="@Model.Activity.PointY" Name="@Model.Activity.ActivityName" ID="@Model.Activity.IdActivity" Type="@Model.Activity.Type">
+        <div class="ScrollWrapper">
+            <h2 class="ScrollingText">@Model.Activity.ActivityName</h2>
+            <h2 class="ScrollTextDupe">@Model.Activity.ActivityName</h2>
+        </div>
+    </div>
+    <select>
+        @if (Model.Activity.Type == 1)
+        {
+            <option value="1" selected>Time</option>
+        }
+        else
+        {
+            <option value="1">Time</option>
+        }
+
+        @if (Model.Activity.Type == 2)
+        {
+            <option value="2" selected>Points</option>
+        }
+        else
+        {
+            <option value="2">Points</option>
+        }
+    </select>
+    <button>Delete</button>
+</li>

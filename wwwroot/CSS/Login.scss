@@ -1,0 +1,60 @@
+@import "Main";
+
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#LoginCard {
+	overflow: hidden;
+	position: relative;
+	width: 75vw;
+	height: 75vw;
+	max-width: 70vw;
+	max-height: 60vh;
+	min-height: 200px;
+	border-radius: 2rem;
+}
+
+.Ball {
+	position: absolute;
+	width: 200%;
+	max-width: calc(100% + 400px);
+	height: 100%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position-y: 90%;
+}
+
+.Glass {
+	width: 100%;
+	height: 100%;
+	border-radius: 2rem;
+}
+
+#LoginCard Form {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	flex-direction: column;
+}
+
+#LoginCard .InputBorder {
+	--_padding-top: 15px;
+	padding-top: var(--_padding-top);
+	color: var(--background-color);
+
+	input {
+		color: var(--background-color);
+	}
+
+	input,
+	label {
+		font-size: large;
+		font-weight: bold;
+		text-shadow: 1px 1px 0 #ffffff, -1px 1px 0 #ffffff, -1px -1px 0 #ffffff, 1px -1px 0 #ffffff;
+	}
+}

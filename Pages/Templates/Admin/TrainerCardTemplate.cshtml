@@ -1,0 +1,19 @@
+﻿@model TrainerCardTemplateModel;
+
+<div class="TrainerCard" ID="@Model.Trainer.IdUser" Name="@Model.Trainer.UserName" TeamID="@Model.Trainer.SDTeam?.IdTeam">
+    <h2><span class="UserName"></span><input class="UserName" type="text"/></h2>
+    <button class="EditButton">Edit</button>
+    <div class="SelectWrapper"></div>
+    <label for="@Model.Trainer.UserName+Role">
+        <label for="@Model.Trainer.UserName+Role">Admin</label>
+        @if (Model.Trainer.Role == 0)
+        {
+            <input id="@Model.Trainer.UserName+Role" class="TrainerRole" type="checkbox" checked />
+        }
+        else
+        {
+            <input id="@Model.Trainer.UserName+Role" class="TrainerRole" type="checkbox" />
+        }
+    </label>
+    <button class="DeleteButton">Delete</button>
+</div>

@@ -1,0 +1,305 @@
+@import "Main";
+
+body {
+	display: grid;
+	overflow-y: clip;
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+	overflow-x: hidden;
+
+	#ActivitiesCardSelector:checked ~ label[for="ActivitiesCardSelector"],
+	#TeamsCardSelector:checked ~ label[for="TeamsCardSelector"],
+	#MembersCardSelector:checked ~ label[for="MembersCardSelector"],
+	#TrainersCardSelector:checked ~ label[for="TrainersCardSelector"] {
+		@extend %buttonHover;
+	}
+
+	&:has(#ActivitiesCardSelector:checked) {
+		--_card-position: 0%;
+	}
+
+	&:has(#TeamsCardSelector:checked) {
+		--_card-position: -100%;
+	}
+
+	&:has(#MembersCardSelector:checked) {
+		--_card-position: -200%;
+	}
+
+	&:has(#TrainersCardSelector:checked) {
+		--_card-position: -300%;
+	}
+
+	#ItemTrack {
+		display: flex;
+		width: 400%;
+		height: 100%;
+
+		& > * {
+			width: 100%;
+			transform: translate(var(--_card-position));
+			transition: 0.5s ease;
+
+			.CardsWrapper {
+				padding-inline: calc((100% - var(--_child-width)) / 2);
+			}
+		}
+
+		#TeamsCard,
+		#MembersCard,
+		#TrainersCard {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(10rem, 30%));
+
+		}
+	}
+}
+
+#MainSelector {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2rem;
+	padding-block: 2rem;
+	justify-content: center;
+
+	input {
+		display: none;
+	}
+
+	label {
+		@extend %button;
+	}
+}
+
+.InputBorder {
+	--_padding-top: var(--tes);
+	padding-top: var(--_padding-top);
+}
+
+#ActivitiesCard {
+	height: 100%;
+	display: grid;
+
+	#FieldWrapper {
+		display: flex;
+		grid-column: 1;
+		grid-row: 1;
+
+		#FieldCanvas {
+			display: block;
+			max-height: 100%;
+			width: 100%;
+		}
+	}
+
+	#MapAddWrapper {
+		@extend %HamButton;
+		padding: var(--_ham-padding);
+		border: var(--_ham-border);
+		border-radius: 100%;
+		background-color: var(--background-color);
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		z-index: 1;
+
+		#MapAddButton {
+			@extend %Timing;
+			position: relative;
+			height: var(--_ham-height);
+			aspect-ratio: 1;
+			rotate: -45deg;
+
+			&.Open {
+				rotate: 0deg;
+			}
+
+			.Line {
+				@extend %Line;
+				width: 133%;
+				transform: rotate(45deg);
+			}
+
+			.Line2 {
+				transform: rotate(-45deg);
+				bottom: 0;
+			}
+		}
+
+		&:hover {
+			#MapAddButton .Line {
+				background-color: var(--accent-color);
+			}
+		}
+	}
+
+	#AddActivityWrapper {
+		@extend %Timing;
+		@extend %Card;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		z-index: 2;
+		translate: -50% -50%;
+		scale: 0;
+	}
+
+	.ListWrapper {
+		@extend %HamButton;
+		width: min(100vw, 425px);
+		padding: 1rem 0 0 1rem;
+		z-index: 1;
+		grid-column: 1;
+		grid-row: 1;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		max-height: 100%;
+		pointer-events: none;
+
+		#hamburger {
+			display: none;
+		}
+
+		#HamburgerWrapper {
+			display: block;
+			border: var(--_ham-border);
+			border-radius: 100%;
+			background-color: var(--background-color);
+			max-width: fit-content;
+			padding: var(--_ham-padding);
+			transition: border 0.5s cubic-bezier(1, 0, 1, -0.15);
+			pointer-events: all;
+		}
+
+		#hamburgerMenu {
+			position: relative;
+			display: block;
+			height: var(--_ham-height);
+			aspect-ratio: 1;
+		}
+
+		#hamburgerMenu .Line {
+			@extend %Line;
+		}
+
+		#HamburgerWrapper:hover #hamburgerMenu .Line {
+			background: var(--accent-color);
+		}
+
+		@for $i from 0 through 2 {
+			#hamburgerMenu .Line#{$i + 1} {
+				top: calc(var(--_ham-line-height) * 2 * #{$i});
+			}
+		}
+
+		#hamburger:checked ~ #HamburgerWrapper {
+			background-color: transparent;
+			border: 2px solid transparent;
+			transition: background-color 0.5s cubic-bezier(1, 0, 1, -0.15);
+		}
+
+		#hamburger:checked ~ #HamburgerWrapper #hamburgerMenu .Line1 {
+			width: 133%;
+			transform: rotate(45deg);
+		}
+
+		#hamburger:checked ~ #HamburgerWrapper #hamburgerMenu .Line2 {
+			opacity: 0;
+		}
+
+		#hamburger:checked ~ #HamburgerWrapper #hamburgerMenu .Line3 {
+			width: 133%;
+			transform: rotate(-45deg);
+		}
+
+		#hamburger:checked ~ .Background,
+		#hamburger:checked ~ #ActivityList {
+			opacity: 1;
+			transform: translateX(0%);
+			pointer-events: all;
+		}
+
+		#ActivityList {
+			@extend %Timing;
+			--_margin: 1rem;
+			display: grid;
+			opacity: 0;
+			width: 100%;
+			overflow-y: auto;
+			max-height: calc(100% - var(--_ham-height) - var(--_margin) - (var(--_ham-padding) + var(--_ham-border-width)) * 2);
+			margin-top: var(--_margin);
+			opacity: 0;
+
+			.ActivityWrapper {
+				@extend %Card;
+				@extend %Timing;
+				overflow: hidden;
+				padding-right: 1rem;
+				margin-bottom: 2rem;
+				background-color: transparent;
+				transform-origin: top center;
+
+				&:hover {
+					background-color: var(--background-color);
+				}
+
+				.Activity {
+					white-space: nowrap;
+					overflow: hidden;
+
+					.ScrollWrapper {
+						--_padding-left: 4rem;
+						width: fit-content;
+
+						h2 {
+							display: inline-block;
+						}
+
+						.ScrollTextDupe {
+							display: none;
+							padding-left: var(--_padding-left);
+						}
+
+						&.animate {
+							display: flex;
+							h2 {
+								padding-left: var(--_padding-left);
+							}
+
+							.ScrollTextDupe {
+								display: inline-block;
+							}
+						}
+					}
+
+					.Options {
+						display: grid;
+					}
+				}
+			}
+
+			@keyframes scrollText {
+				0% {
+					transform: translateX(0%);
+				}
+				100% {
+					transform: translateX(-50%);
+				}
+			}
+		}
+
+		.Background {
+			@extend %Timing;
+			position: absolute;
+			transform: translateX(-100%);
+			inset: 0;
+			background: linear-gradient(90deg, var(--background-color) 25%, transparent 250%);
+			opacity: 0;
+			z-index: -1;
+		}
+	}
+}

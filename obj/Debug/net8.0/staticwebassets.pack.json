@@ -1,0 +1,521 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Sportdag-Terschuur.bundle.scp.css",
+      "PackagePath": "staticwebassets\\Sportdag-Terschuur.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\Assets\\DataBaseTBSD.mwb",
+      "PackagePath": "staticwebassets\\Assets\\DataBaseTBSD.mwb"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\Assets\\DataBaseTBSD.mwb.bak",
+      "PackagePath": "staticwebassets\\Assets\\DataBaseTBSD.mwb.bak"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\CSS\\Admin.css",
+      "PackagePath": "staticwebassets\\CSS\\Admin.css"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\CSS\\Admin.scss",
+      "PackagePath": "staticwebassets\\CSS\\Admin.scss"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\CSS\\Login.css",
+      "PackagePath": "staticwebassets\\CSS\\Login.css"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\CSS\\Login.scss",
+      "PackagePath": "staticwebassets\\CSS\\Login.scss"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\CSS\\Main.css",
+      "PackagePath": "staticwebassets\\CSS\\Main.css"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\CSS\\Main.scss",
+      "PackagePath": "staticwebassets\\CSS\\Main.scss"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\IMG\\Field.png",
+      "PackagePath": "staticwebassets\\IMG\\Field.png"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\IMG\\Sports-Ball-Transparent.png",
+      "PackagePath": "staticwebassets\\IMG\\Sports-Ball-Transparent.png"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\IMG\\TB logo.png",
+      "PackagePath": "staticwebassets\\IMG\\TB logo.png"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\JS\\Admin.js",
+      "PackagePath": "staticwebassets\\JS\\Admin.js"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\JS\\Animations.js",
+      "PackagePath": "staticwebassets\\JS\\Animations.js"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\JS\\CustomMap.js",
+      "PackagePath": "staticwebassets\\JS\\CustomMap.js"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\JS\\CustomMapHandler.js",
+      "PackagePath": "staticwebassets\\JS\\CustomMapHandler.js"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\JS\\Field.js",
+      "PackagePath": "staticwebassets\\JS\\Field.js"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\JS\\Functions.js",
+      "PackagePath": "staticwebassets\\JS\\Functions.js"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\JS\\Points.js",
+      "PackagePath": "staticwebassets\\JS\\Points.js"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\JS\\RGBAnimation.js",
+      "PackagePath": "staticwebassets\\JS\\RGBAnimation.js"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\JS\\ScrollText.js",
+      "PackagePath": "staticwebassets\\JS\\ScrollText.js"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\JS\\SportdagField.js",
+      "PackagePath": "staticwebassets\\JS\\SportdagField.js"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\Admin.ts",
+      "PackagePath": "staticwebassets\\TS\\Admin.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\Animations.ts",
+      "PackagePath": "staticwebassets\\TS\\Animations.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\CustomMap.ts",
+      "PackagePath": "staticwebassets\\TS\\CustomMap.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\CustomMapHandler.ts",
+      "PackagePath": "staticwebassets\\TS\\CustomMapHandler.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\Field.ts",
+      "PackagePath": "staticwebassets\\TS\\Field.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\Functions.ts",
+      "PackagePath": "staticwebassets\\TS\\Functions.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\Models\\Hubs\\ActivityHub.ts",
+      "PackagePath": "staticwebassets\\TS\\Models\\Hubs\\ActivityHub.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\Models\\Hubs\\BaseHub.ts",
+      "PackagePath": "staticwebassets\\TS\\Models\\Hubs\\BaseHub.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\Models\\Hubs\\BaseHubTeam.ts",
+      "PackagePath": "staticwebassets\\TS\\Models\\Hubs\\BaseHubTeam.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\Models\\Hubs\\MemberHub.ts",
+      "PackagePath": "staticwebassets\\TS\\Models\\Hubs\\MemberHub.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\Models\\Hubs\\RoundHub.ts",
+      "PackagePath": "staticwebassets\\TS\\Models\\Hubs\\RoundHub.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\Models\\Hubs\\SignalRHub.ts",
+      "PackagePath": "staticwebassets\\TS\\Models\\Hubs\\SignalRHub.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\Models\\Hubs\\TeamHub.ts",
+      "PackagePath": "staticwebassets\\TS\\Models\\Hubs\\TeamHub.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\Models\\Hubs\\TrainerHub.ts",
+      "PackagePath": "staticwebassets\\TS\\Models\\Hubs\\TrainerHub.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\Models\\Items\\BaseItem.ts",
+      "PackagePath": "staticwebassets\\TS\\Models\\Items\\BaseItem.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\Models\\Items\\BaseItemChild.ts",
+      "PackagePath": "staticwebassets\\TS\\Models\\Items\\BaseItemChild.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\Models\\Items\\BaseItemMember.ts",
+      "PackagePath": "staticwebassets\\TS\\Models\\Items\\BaseItemMember.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\Models\\Items\\BaseItemTeam.ts",
+      "PackagePath": "staticwebassets\\TS\\Models\\Items\\BaseItemTeam.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\Models\\Items\\BaseItemTrainer.ts",
+      "PackagePath": "staticwebassets\\TS\\Models\\Items\\BaseItemTrainer.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\Models\\Items\\BaseLink.ts",
+      "PackagePath": "staticwebassets\\TS\\Models\\Items\\BaseLink.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\Models\\Items\\Member.ts",
+      "PackagePath": "staticwebassets\\TS\\Models\\Items\\Member.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\Models\\Items\\Team.ts",
+      "PackagePath": "staticwebassets\\TS\\Models\\Items\\Team.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\Models\\Items\\Trainer.ts",
+      "PackagePath": "staticwebassets\\TS\\Models\\Items\\Trainer.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\Models\\Types.ts",
+      "PackagePath": "staticwebassets\\TS\\Models\\Types.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\Points.ts",
+      "PackagePath": "staticwebassets\\TS\\Points.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\RGBAnimation.ts",
+      "PackagePath": "staticwebassets\\TS\\RGBAnimation.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\ScrollText.ts",
+      "PackagePath": "staticwebassets\\TS\\ScrollText.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\SportdagField.ts",
+      "PackagePath": "staticwebassets\\TS\\SportdagField.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\new\\GeneralItems.ts",
+      "PackagePath": "staticwebassets\\TS\\new\\GeneralItems.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\new\\Hubs\\AdminBaseHub.ts",
+      "PackagePath": "staticwebassets\\TS\\new\\Hubs\\AdminBaseHub.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\new\\Hubs\\BaseHub.ts",
+      "PackagePath": "staticwebassets\\TS\\new\\Hubs\\BaseHub.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\new\\Hubs\\BaseLinkHub.ts",
+      "PackagePath": "staticwebassets\\TS\\new\\Hubs\\BaseLinkHub.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\new\\Hubs\\MemberHub.ts",
+      "PackagePath": "staticwebassets\\TS\\new\\Hubs\\MemberHub.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\new\\Items\\AdminBaseItem.ts",
+      "PackagePath": "staticwebassets\\TS\\new\\Items\\AdminBaseItem.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\new\\Items\\BaseItem.ts",
+      "PackagePath": "staticwebassets\\TS\\new\\Items\\BaseItem.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\TS\\new\\Items\\BaseLinkItem.ts",
+      "PackagePath": "staticwebassets\\TS\\new\\Items\\BaseLinkItem.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\chatgpt.ts",
+      "PackagePath": "staticwebassets\\chatgpt.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\convert-to-global.js",
+      "PackagePath": "staticwebassets\\convert-to-global.js"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\eslint.config.js",
+      "PackagePath": "staticwebassets\\eslint.config.js"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\local-packages.json",
+      "PackagePath": "staticwebassets\\local-packages.json"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\package-lock.json",
+      "PackagePath": "staticwebassets\\package-lock.json"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\package.json",
+      "PackagePath": "staticwebassets\\package.json"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\test.ts",
+      "PackagePath": "staticwebassets\\test.ts"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\tsconfig.json",
+      "PackagePath": "staticwebassets\\tsconfig.json"
+    },
+    {
+      "Id": "C:\\Users\\rickv\\OneDrive\\Documenten\\Programming\\Personal\\Sportdag-Terschuur\\Sportdag-Terschuur\\Sportdag-Terschuur\\wwwroot\\webpack.config.js",
+      "PackagePath": "staticwebassets\\webpack.config.js"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Sportdag-Terschuur.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.Sportdag-Terschuur.props",
+      "PackagePath": "build\\Sportdag-Terschuur.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.Sportdag-Terschuur.props",
+      "PackagePath": "buildMultiTargeting\\Sportdag-Terschuur.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.Sportdag-Terschuur.props",
+      "PackagePath": "buildTransitive\\Sportdag-Terschuur.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

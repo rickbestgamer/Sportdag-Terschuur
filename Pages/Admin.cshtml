@@ -1,0 +1,164 @@
+﻿@page
+@using Sportdag_Terschuur.Pages.Templates.Admin;
+@using Sportdag_Terschuur.Classes;
+@model Sportdag_Terschuur.Pages.AdminModel
+@{
+    var mapImage = Url.Content("~/IMG/Field.png");
+    SDTeam? tTeam;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/CSS/Admin.css" type="text/css" asp-append-version="true" />
+}
+
+@section Scripts {
+    <script>
+        const imagePath = "@mapImage";
+        const UpdateFetchPath = "@Url.Page("/Admin", "UpdateActivity")"
+    </script>
+    <script src="~/JS/Field.js" type="text/javascript" asp-append-version="true" defer></script>
+    <script src="~/JS/Admin.js" type="text/javascript" asp-append-version="true" defer></script>
+    <script src="~/JS/ScrollText.js" type="text/javascript" asp-append-version="true" defer></script>
+}
+
+<div id="MainSelector">
+    <input id="ActivitiesCardSelector" name="cards" type="radio" checked>
+    <input id="TeamsCardSelector" name="cards" type="radio">
+    <input id="MembersCardSelector" name="cards" type="radio">
+    <input id="TrainersCardSelector" name="cards" type="radio">
+
+    <label for="ActivitiesCardSelector">
+        Activities
+    </label>
+
+    <label for="TeamsCardSelector">
+        Teams
+    </label>
+
+    <label for="MembersCardSelector">
+        Members
+    </label>
+
+    <label for="TrainersCardSelector">
+        Trainers
+    </label>
+</div>
+
+<div id="ItemTrack">
+    <div class="CardWrapper">
+        <div id="ActivitiesCard">
+            <div id="FieldWrapper">
+                <canvas id="FieldCanvas"></canvas>
+                @* <img src="~/IMG/Field.png" /> *@
+                @foreach (var activity in Model.Activities)
+                {
+                }
+                <div id="MapAddWrapper">
+                    <div id="MapAddButton">
+                        <span class="Line Line1"></span>
+                        <span class="Line Line2"></span>
+                    </div>
+                </div>
+
+                <div id="AddActivityWrapper">
+                    <form id="AddActivityForm">
+                        <div class="InputBorder">
+                            <input id="AddActivityField" type="text" required />
+                            <label>Activity name</label>
+                        </div>
+                    </form>
+
+                    <select>
+                        <option value="1">Time</option>
+                        <option value="2">Points</option>
+                    </select>
+
+                    <button>Confirm</button>
+                </div>
+            </div>
+
+
+            <div class="ListWrapper">
+                <input type="checkbox" id="hamburger">
+                <label id="HamburgerWrapper" for="hamburger">
+                    <label id="hamburgerMenu" for="hamburger">
+                        <span class="Line Line1"></span>
+                        <span class="Line Line2"></span>
+                        <span class="Line Line3"></span>
+                    </label>
+                </label>
+
+                <ul id="ActivityList">
+                    @foreach (var activity in Model.Activities)
+                    {
+                        @await Html.PartialAsync("Templates/Admin/ActivityTemplate", new ActivityTemplateModel() { Activity = activity })
+                    }
+                </ul>
+                <div class="Background"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="CardWrapper">
+        <div id="TeamsCard">
+            <form id="NewTeam">
+                <label for="NewTeam">
+                    <label for="NewTeam">Name</label>
+                    <input id="NewTeamName" type="text" />
+                </label>
+                <button type="submit">Submit</button>
+            </form>
+            @foreach (SDTeam team in Model.Teams)
+            {
+                @await Html.PartialAsync("Templates/Admin/TeamCardTemplate", new TeamCardTemplateModel() { Team = team})
+            }
+        </div>
+    </div>
+
+    <div class="CardWrapper">
+        <div id="MembersCard">
+            <form id="NewMember">
+                <label for="NewMemberFirst">
+                    <label for="NewMemberFirst">FirstName</label>
+                    <input id="NewMemberFirst" type="text" />
+                </label>
+                <label for="NewMemberLast">
+                    <label for="NewMemberLast">LastName</label>
+                    <input id="NewMemberLast" type="text" />
+                </label>
+                <select class="Team">
+                    <option value="0"></option>
+                </select>
+                <button type="submit">Submit</button>
+            </form>
+            @foreach (SDTeamMember member in Model.Members)
+            {
+                @await Html.PartialAsync("Templates/Admin/MemberCardTemplate", new MemberCardTemplateModel { Member = member })
+            }
+        </div>
+    </div>
+
+    <div class="CardWrapper">
+        <div id="TrainersCard">
+            <form id="NewTrainer">
+                <label for="NewTrainerName">
+                    <label for="NewTrainerName">Name</label>
+                    <input id="NewTrainerName" type="text" />
+                </label>
+                <select class="Team">
+                    <option value="0"></option>
+                </select>
+                <label for="NewRole">
+                    <label for="NewRole">Admin</label>
+                    <input id="NewRole" type="checkbox" />
+                </label>
+                <button type="submit">Submit</button>
+            </form>
+            @foreach (SDUser trainer in Model.Users)
+            {
+                tTeam = Model.Teams.FirstOrDefault(t => t.IdTeam == trainer.SDTeam_idTeam);
+                @await Html.PartialAsync("Templates/Admin/TrainerCardTemplate", new TrainerCardTemplateModel { Trainer = trainer })
+            }
+        </div>
+    </div>
+</div>

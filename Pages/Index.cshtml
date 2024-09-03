@@ -1,0 +1,31 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Login";
+    var backgroundImage = Url.Content("~/IMG/Sports-Ball-Transparent.png");
+}
+
+@section Styles {
+    <link href="~/CSS/Login.css" rel="stylesheet" asp-append-version="true" />
+}
+
+@* @section Scripts {
+} *@
+
+<div id="LoginCard">
+    <div class="Ball" style="background-image: url(@backgroundImage)"></div>
+    <div class="Glass">
+        <form method="post">
+            <img src="~/IMG/TB logo.png">
+            <label class="InputBorder" asp-for="Login.UserName">
+                <input asp-for="Login.UserName" id="UserName" type="text" required>
+                <label>Username</label>
+            </label>
+            <label class="InputBorder" asp-for="Login.Password">
+                <input asp-for="Login.Password" id="Login_Password" type="password" required>
+                <label>Password</label>
+            </label>
+            <button type="submit" name="Submit">Log in</button>
+        </form>
+    </div>
+</div>

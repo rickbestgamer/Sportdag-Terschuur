@@ -1,0 +1,14 @@
+{
+	"compilerOptions": {
+		"target": "ESNext", // or a higher version like "es6" or "esnext"
+		"module": "ESNext", // use "esnext" if you are using the latest ES features
+		"moduleResolution": "node",
+		"outDir": "./JS", // specify the output directory
+		"rootDir": "", // specify the root directory of your source files
+		"sourceMap": true,
+		"strict": true, // enable all strict type-checking options
+		"esModuleInterop": true, // enable compatibility with CommonJS
+		"forceConsistentCasingInFileNames": true
+	},
+	"include": ["./TS/*.ts"]
+}
