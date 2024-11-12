@@ -18,7 +18,7 @@ namespace Sportdag_Terschuur.Classes
 
             if (name == null || password == null) return false;
 
-            SDUser? user = db.SDUser.First(user => user.UserName == name && user.UserPassword == password);
+            SDUser? user = db.SDUser.First(user => user.Name == name && user.Password == password);
 
             if (user == null) return false;
 
@@ -26,10 +26,10 @@ namespace Sportdag_Terschuur.Classes
             {
                 Expires = DateTime.Now.AddYears(10)
             };
-            context.Response.Cookies.Append("Name", user.UserName, cookie);
-            context.Response.Cookies.Append("Password", user.UserPassword, cookie);
-            context.Session.SetInt32("Role", user.Role);
-            context.Session.SetInt32("IdUser", user.IdUser);
+            context.Response.Cookies.Append("Name", user.Name, cookie);
+            context.Response.Cookies.Append("Password", user.Password, cookie);
+            context.Session.SetInt32("Role", user.Role ? 1 : 0);
+            context.Session.SetInt32("IdUser", user.ID);
             return true;
         }
     }

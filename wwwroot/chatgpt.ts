@@ -26,7 +26,7 @@ abstract class BaseLinkHub<T extends BaseLinkItem> {
 
 	registerObserver = (observer: (linkItem: T) => void) => {
 		this.observers.push(observer);
-		this.linkItems.forEach((item) => observer(item));
+		this.linkItems.forEach(observer);
 	};
 
 	private notifyObservers = (linkItem: T) => {
@@ -37,7 +37,7 @@ abstract class BaseLinkHub<T extends BaseLinkItem> {
 class LinkHub<T extends BaseLinkItem> extends BaseLinkHub<T> {
 	static registerObserver(observer: (linkItem: LinkItemTeam) => void) {
 		this.getHubInstance().registerObserver(observer);
-	};
+	}
 }
 
 class LinkItemMember extends BaseLinkItem {}
@@ -53,7 +53,17 @@ class TeamHub {
 
 	constructor() {
 		this.linkHub = LinkHubTeam.getHubInstance();
+		this.initializeTeams();
 	}
+
+	initializeTeams() {
+		this.NewItem("Team a");
+		this.NewItem("Team B");
+	}
+
+	NewItem = (name: string) => {
+		this.linkHub.addLinkItem(new LinkItemTeam(name));
+	};
 }
 
 class MemberHub {
@@ -89,3 +99,5 @@ const trainer = new TrainerHub();
 console.log(member.linkHub);
 console.log(team.linkHub);
 console.log(trainer.linkHub);
+
+team.NewItem("New Team");

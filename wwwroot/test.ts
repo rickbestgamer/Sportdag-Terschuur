@@ -1,138 +1,151 @@
-interface LinkHubObserver {
-	update(linkItem: BaseLinkItem): void;
-}
-abstract class BaseLinkHub<T extends BaseLinkItem> {
-	protected linkItems: T[] = [];
+import { GetAttributeId } from "../Functions";
 
-	addLinkItem(linkItem: T) {
-		this.linkItems.push(linkItem);
-		LinkHubManager.notifyObservers(this.constructor as new () => BaseLinkHub<BaseLinkItem>, linkItem);
+export class SelectWrapper {
+	Wrapper: HTMLElement;
+	ItemIDS: Set<number> = new Set();
+	Selects: Map<number, Select> = new Map();
+
+	constructor(wrapper: HTMLElement) {
+		this.Wrapper = wrapper;
+		this.ItemIDS = GetAttributeId(wrapper, "IDs");
 	}
 
-	getLinkItems(): T[] {
-		return this.linkItems;
-	}
-}
-class LinkHubManager {
-	private static linkHubs: Map<string, BaseLinkHub<BaseLinkItem>> = new Map();
-	private static observers: Map<string, LinkHubObserver[]> = new Map();
+	CreateSelect = (Id: number, Update?: (select: Select) => any): Select => {
+		const select = new Select(Update);
+		select.ID = Id;
 
-	static getLinkHub = <T extends BaseLinkHub<BaseLinkItem>>(hubType: new () => T) => {
-		const typeName = hubType.name;
-		if (!this.linkHubs.has(typeName)) {
-			this.linkHubs.set(typeName, new hubType());
-		}
-		return this.linkHubs.get(typeName) as T;
+		this.AddSelect(select);
+
+		return select;
 	};
 
-	static addLinkItem<T extends BaseLinkHub<BaseLinkItem>>(hubType: new () => T, linkItem: BaseLinkItem) {
-		const hub = this.getLinkHub(hubType);
-		hub.addLinkItem(linkItem);
-	}
+	AddSelect = (select: Select) => {
+		this.Selects.set(select.ID, select);
+		this.Wrapper.appendChild(select.Element);
+	};
 
-	static registerObserver<T extends BaseLinkHub<BaseLinkItem>>(hubType: new () => T, observer: LinkHubObserver) {
-		const typeName = hubType.name;
-		if (!this.observers.has(typeName)) {
-			this.observers.set(typeName, []);
+	GetAllItemIDs = (): number[] => {
+		const itemIDs: number[] = [];
+
+		this.Selects.forEach((select) => {
+			itemIDs.push(select.ID);
+		});
+
+		return itemIDs;
+	};
+}
+
+export class Select {
+	Element = document.createElement("select");
+	private Options: Option[] = [];
+	private _ItemID: number = 0;
+	private SelectedOption: string;
+	private AllowSelectionChange: boolean = true;
+	private _AllowNull: boolean = true;
+	Update?: (select: Select) => any;
+
+	constructor(update?: (select: Select) => any) {
+		if (update) {
+			// this.Element.addEventListener("change", (e) => {
+			// const option = this.Element.value;
+			// const selectOption = this.Element.options[this.Element.selectedIndex];
+			// this.AllowSelectionChange = false;
+			// this.ID = this.Options.find((o) => o.Element == selectOption)?.ID ?? 0;
+			// this.AllowSelectionChange = true;
+			// this.Element.value = this.SelectedOption;
+			// this.SelectedOption = option;
+			// });
+		} else {
+			this.Element.addEventListener("change", (e) => {
+				const selectOption = this.Element.options[this.Element.selectedIndex];
+				this.ID = this.Options.find((o) => o.Element == selectOption)?.ID ?? 0;
+			});
 		}
-		this.observers.get(typeName)!.push(observer);
 
-		const hub = this.getLinkHub(hubType);
-		hub.getLinkItems().forEach((item) => observer.update(item));
+		this.Update = update;
+		this.AllowNull = this._AllowNull;
+		this.SelectedOption = this.Element.value;
 	}
 
-	static notifyObservers<T extends BaseLinkHub<BaseLinkItem>>(hubType: new () => T, linkItem: BaseLinkItem) {
-		const typeName = hubType.name;
-		if (this.observers.has(typeName)) {
-			this.observers.get(typeName)!.forEach((observer) => observer.update(linkItem));
+	get ID(): number {
+		return this._ItemID;
+	}
+
+	set ID(id: number) {
+		const matchingOption = this.Options.find((o) => o.ID !== id);
+		if (this.Update) {
+			const option = this.Element.value;
+			this.AllowSelectionChange = false;
+			this.Element.value = this.SelectedOption;
+			this.SelectedOption = option;
+			this.Update(this);
 		}
-	}
-}
 
-abstract class BaseLinkItem {
-	constructor(public Name: string) {}
-}
-
-class LinkMember extends BaseLinkItem {}
-class LinkTeam extends BaseLinkItem {
-	constructor(public teamName: string) {
-		super(teamName);
-	}
-}
-class LinkTrainer extends BaseLinkItem {}
-
-class LinkHubMember extends BaseLinkHub<LinkMember> {}
-class LinkHubTeam extends BaseLinkHub<LinkTeam> {}
-class LinkHubTrainer extends BaseLinkHub<LinkTrainer> {}
-
-class MemberHub implements LinkHubObserver {
-	constructor() {
-		LinkHubManager.getLinkHub(LinkHubMember);
-		LinkHubManager.registerObserver(LinkHubTeam, this); // Register as an observer to LinkHubTeam
-		this.initializeMembers();
-	}
-
-	initializeMembers() {
-		// Initialize members if needed
-	}
-
-	NewItem() {
-		// Handle new items if needed
-	}
-
-	update(linkItem: BaseLinkItem) {
-		if (linkItem instanceof LinkTeam) {
-			console.log(`MemberHub received update: ${linkItem.teamName}`);
+		if (matchingOption && this.AllowSelectionChange) {
+			matchingOption.SetSelect();
+			this.SelectedOption = matchingOption.Element.value;
 		}
-	}
-}
 
-class TeamHub {
-	constructor() {
-		LinkHubManager.getLinkHub(LinkHubTeam);
-		this.initializeTeams();
+		this.AllowSelectionChange = true;
+		this._ItemID = id;
 	}
 
-	initializeTeams() {
-		LinkHubManager.addLinkItem(LinkHubTeam, new LinkTeam("Team A"));
-		LinkHubManager.addLinkItem(LinkHubTeam, new LinkTeam("Team B"));
+	get AllowNull(): boolean {
+		return this._AllowNull;
 	}
 
-	NewItem(name: string) {
-		const newTeam = new LinkTeam(name);
-		LinkHubManager.addLinkItem(LinkHubTeam, newTeam);
-	}
-}
-
-class TrainerHub implements LinkHubObserver {
-	constructor() {
-		LinkHubManager.getLinkHub(LinkHubTrainer);
-		LinkHubManager.registerObserver(LinkHubTeam, this); // Register as an observer to LinkHubTeam
-		this.initializeTrainers();
-	}
-
-	initializeTrainers() {
-		// Initialize trainers if needed
-	}
-
-	NewItem() {
-		// Handle new items if needed
-	}
-
-	update(linkItem: BaseLinkItem) {
-		if (linkItem instanceof LinkTeam) {
-			console.log(`TrainerHub received update: ${linkItem.Name}`);
+	set AllowNull(bool: boolean) {
+		this._AllowNull = bool;
+		if (bool) this.CreateOption(0, "");
+		else {
+			this.Options.find((o) => o.ID == 0)?.Element.remove();
+			this.Options = this.Options.filter((o) => o.ID === 0);
 		}
 	}
+
+	CreateOption = (id: number, text: string) => {
+		const option = new Option(id, text);
+
+		this.AddOption(option);
+	};
+
+	AddOption = (option: Option) => {
+		option.Element.selected = this.ID === option.ID;
+
+		this.InsertOption(option);
+	};
+
+	private InsertOption = (option: Option) => {
+		const index = this.Options.findIndex((o) => o.ID > option.ID);
+
+		if (index == -1) {
+			this.Options.push(option);
+			this.Element.add(option.Element);
+		} else {
+			this.Options.splice(index, 0, option);
+			this.Element.add(option.Element, index);
+		}
+	};
 }
 
-function initializeHub<T extends TrainerHub | MemberHub | TeamHub>(HubClass: new () => T): T {
-	const tmpHub = new HubClass();
-	tmpHub.NewItem("New Team");
-	return tmpHub;
-}
+export class Option {
+	ID: number;
+	Element: HTMLOptionElement;
 
-const memberHub = initializeHub(MemberHub);
-const teamHub = initializeHub(TeamHub);
-const trainerHub = initializeHub(TrainerHub);
-teamHub.NewItem("what");
+	constructor(id: number, text: string) {
+		const option = document.createElement("option");
+
+		this.ID = id;
+		this.Element = option;
+
+		option.textContent = text;
+	}
+
+	set Text(text: string) {
+		this.Element.textContent = text;
+	}
+
+	SetSelect = () => {
+		this.Element.selected = true;
+	};
+}

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Sportdag-Terschuur")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ade43260c6f86525e8f11593ebd912f5b866cebd")]
 [assembly: System.Reflection.AssemblyProductAttribute("Sportdag-Terschuur")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Sportdag-Terschuur")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

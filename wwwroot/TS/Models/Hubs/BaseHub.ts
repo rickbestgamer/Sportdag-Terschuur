@@ -1,105 +1,61 @@
-import { Option, BaseSignalRHub, AdminSignalRHub } from "./SignalRHub";
-import { StringToElement, TypedEventEmitter } from "../../Functions";
-import { ApiResponse, EmitEvents, FormElement, HubEvents, ItemChild, ItemParent, Items, ItemTypes } from "../Types";
-import { Member } from "../Items/Member";
-import { Trainer } from "../Items/Trainer";
-import { Team } from "../Items/Team";
+import { StringToElement } from "../../Functions";
+import { AdminItems, ApiResponse, Items, ServerUpdate, ServerUpdateBase } from "../../Models/Types";
+import { BaseSignalRHub } from "./SignalRHub";
 
-export class BaseHub<T extends Items> {
-	protected Hub: AdminSignalRHub<T>;
+export abstract class BaseHub<T extends Items | AdminItems, H extends BaseSignalRHub<T> = BaseSignalRHub<T>> {
+	protected Hub: H;
 	Wrapper: HTMLElement;
 	Items: T[] = [];
-	protected FuncCallBack: TypedEventEmitter<HubEvents>;
-	protected NewForm?: HTMLFormElement;
-	UpdateItem: (arg: T) => Promise<unknown>;
-	DeleteItem: (arg: T) => Promise<unknown>;
 
-	constructor(wrapper: HTMLElement, newForm: HTMLFormElement | undefined, funcCallBack: TypedEventEmitter<HubEvents>, hubName: string, private ItemClass: new (card: HTMLElement, update: (arg: T) => Promise<unknown>, Delete: (arg: T) => Promise<unknown>) => T, updateItem: (arg: T) => Promise<unknown>, deleteItem: (arg: T) => Promise<unknown>) {
+	constructor(wrapper: HTMLElement, hubName: string) {
 		this.Wrapper = wrapper;
-		this.FuncCallBack = funcCallBack;
-		this.Hub = new AdminSignalRHub(hubName, this.ServerUpdate, this.ServerDelete, this.ServerAdd);
-		this.NewForm = newForm;
-		this.UpdateItem = updateItem;
-		this.DeleteItem = deleteItem;
+		this.Hub = this.createHub(hubName);
 	}
 
-	protected ExtendServerUpdate?: (item: T, ...args: ItemTypes<T>) => void;
-	protected ExtendServerUpdateAfter?: (item: T, id: number | undefined) => void;
+	protected createHub(hubName: string): H {
+		return new BaseSignalRHub<T>(hubName, this.ServerUpdate, this.ServerDelete, this.ServerCreate) as H;
+	}
 
-	protected ServerUpdate = (...args: ItemTypes<T>) => {
+	protected ServerCreate = (response: ApiResponse): T => {
+		const element = StringToElement(response.result);
+
+		this.Wrapper.appendChild(element);
+
+		return this.CreateItem(element);
+	};
+
+	protected abstract ExtendServerUpdate?: (item: T, ...args: ServerUpdate<T>) => void;
+
+	protected ServerUpdate = (...args: ServerUpdateBase<T>) => {
+		const [id, ...rest] = args;
 		let item = this.Items.find((i) => i.ID === args[0]);
-		if (!item) return;
-		this.ExtendServerUpdate?.(item, ...args);
-		this.ExtendServerUpdateAfter?.(item, args[4] ? args[4] : (args[3] as number));
-		this.emitEvent("update", item);
+		if (!item) {
+			console.warn(`Item with ID ${id} not found for update.`);
+			return;
+		}
+		this.ExtendServerUpdate?.(item, ...(rest as ServerUpdate<T>));
 	};
 
-	protected ServerAdd = (response: ApiResponse) => {
-			const element = StringToElement(response.result);
-			this.Wrapper.appendChild(element);
-			const item = this.NewItem(element);
-	};
-
-	AddOption = (parent: ItemParent, item: ItemChild<T>, childID: number, select: HTMLSelectElement, options: Option[]) => {
-			let option = item.CreateOption();
-			option.Option.selected = item.ID == childID;
-			select.appendChild(option.Option);
-			options.push(option);
-	};
-
-	protected ExtendServerDelete?: (item: T) => void;
+	protected abstract ExtendServerDelete?: (item: T) => void;
 
 	protected ServerDelete = (id: number) => {
 		const item = this.Items.find((i) => i.ID === id);
-		if (!item) return;
+		if (!item) {
+			console.warn(`Item with ID ${id} not found for deletion.`);
+			return;
+		}
 		item.Card.remove();
 		this.Items = this.Items.filter((i) => i !== item);
-		this.emitEvent("delete", item);
 		this.ExtendServerDelete?.(item);
 	};
 
-	private Creating: boolean = false;
+	protected abstract ConstructItem: (card: HTMLElement) => T;
+	protected ExtendCreate?: (item: T) => void;
 
-	protected CreateItem = async (createFunc: () => Promise<unknown>): Promise<unknown> => {
-		if (this.Creating || !this.NewForm) return;
-		const elements = this.NewForm.querySelectorAll("input, button, select") as NodeListOf<FormElement>;
-		this.toggleFormElements(elements, false);
-
-		try {
-			await createFunc();
-		} catch (error) {
-			console.error("Error Creating item", error);
-		} finally {
-			this.toggleFormElements(elements, true);
-		}
-	};
-
-	private toggleFormElements = (elements: NodeListOf<FormElement>, disabled: boolean) => {
-	this.Creating = !disabled;
-	this.NewForm!.ariaDisabled = !disabled ? "true" : null;
-	elements.forEach((element) => (element.disabled = !disabled));
-	};
-
-	protected ExtendAdd?: (item: T) => void;
-
-	NewItem = (card: HTMLElement): T => {
-		const item = new this.ItemClass(card, this.UpdateItem, this.DeleteItem);
+	CreateItem = (card: HTMLElement): T => {
+		const item = this.ConstructItem(card);
 		this.Items.push(item);
-		this.emitEvent("create", item);
-		this.ExtendAdd?.(item);
+		this.ExtendCreate?.(item);
 		return item;
-	};
-
-	emitEvent = (eventType: EmitEvents, item: T) => {
-		const eventMap: Record<EmitEvents, Record<string, keyof HubEvents>> = {
-			create: { Team: "teamCreate", Trainer: "trainerCreate", Member: "memberCreate" },
-			update: { Team: "teamUpdate", Trainer: "trainerUpdate", Member: "memberUpdate" },
-			delete: { Team: "teamDeleted", Trainer: "trainerDeleted", Member: "memberDelete" },
-		};
-		const itemType = item instanceof Team ? "Team" : item instanceof Trainer ? "Trainer" : item instanceof Member ? "Member" : null;
-		if (!itemType) return;
-		const event = eventMap[eventType][itemType];
-		const payload: any = eventType === "delete" ? { id: item.ID } : { [itemType.toLowerCase()]: item };
-		this.FuncCallBack.Emit(event, payload);
 	};
 }

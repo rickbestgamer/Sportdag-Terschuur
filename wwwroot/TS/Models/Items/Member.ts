@@ -1,45 +1,36 @@
-import { Select } from "../Hubs/SignalRHub";
+import { AdminBaseItem } from "./AdminBaseItem";
 import { BaseItem } from "./BaseItem";
-import { BaseItemTeam } from "./BaseItemTeam";
+import { Select } from "../GeneralItems";
+import { GetAttributeId } from "../../Functions";
+import { HubFactory } from "../Links/Hubs/HubFactory";
+import { AdminTeamLinkHub } from "../Links/Hubs/TeamLinkHub";
 
-export class Member extends BaseItem<Member> {
-	ItemTeams: BaseItemTeam<Member>;
+class MemberBaseData<T extends BaseItem> {
 	Present: HTMLInputElement;
 	private _FirstName: string = "";
+	private FInput?: HTMLInputElement;
 	FirstNameSpan: HTMLSpanElement;
-	FirstNameInput: HTMLInputElement;
 	private _LastName: string = "";
+	private LInput?: HTMLInputElement;
 	LastNameSpan: HTMLElement;
-	LastNameInput: HTMLInputElement;
 
-	constructor(card: HTMLElement, update: (arg: Member) => Promise<unknown>, Delete: (arg: Member) => Promise<unknown>) {
-		super(card, update, Delete);
-		this.ItemTeams = new BaseItemTeam<Member>(this, update);
+	constructor(card: HTMLElement, update: (arg: T) => Promise<unknown>, parent: T, fInput?: HTMLInputElement, lInput?: HTMLInputElement) {
+		this.FInput = fInput;
+		this.LInput = lInput;
 		this.Present = card.querySelector("input.Present")!;
 		this.Present.addEventListener("change", async () => {
 			this.Present.disabled = true;
-			await update(this);
+			await update(parent);
 			this.Present.disabled = false;
 		});
 
 		this.FirstNameSpan = card.querySelector("span.FirstName")!;
-		this.FirstNameInput = card.querySelector("input.FirstName")!;
 		this.FirstName = card.getAttribute("FirstName")!;
 		card.removeAttribute("FirstName");
 
 		this.LastNameSpan = card.querySelector("span.LastName")!;
-		this.LastNameInput = card.querySelector("input.LastName")!;
 		this.LastName = card.getAttribute("LastName")!;
 		card.removeAttribute("LastName");
-
-		this.EditElements.push(this.FirstNameSpan, this.LastNameSpan);
-		this.EditInputs.push(this.FirstNameInput, this.LastNameInput);
-		this.ExtendConfirmBefore = (): boolean => {
-			if (this.FirstNameInput.value == "" || this.LastNameInput.value == "") return false;
-			this.FirstName = this.FirstNameInput.value;
-			this.LastName = this.LastNameInput.value;
-			return true;
-		};
 	}
 
 	get FirstName(): string {
@@ -49,7 +40,7 @@ export class Member extends BaseItem<Member> {
 	set FirstName(name: string) {
 		this._FirstName = name;
 		this.FirstNameSpan.textContent = name;
-		this.FirstNameInput.value = name;
+		if (this.FInput) this.FInput.value = name;
 	}
 
 	get LastName(): string {
@@ -59,6 +50,67 @@ export class Member extends BaseItem<Member> {
 	set LastName(name: string) {
 		this._LastName = name;
 		this.LastNameSpan.textContent = name;
-		this.LastNameInput.value = name;
+		if (this.LInput) this.LInput.value = name;
+	}
+}
+
+export class AdminMember extends AdminBaseItem<AdminMember> {
+	Data: MemberBaseData<AdminMember>;
+	FirstNameInput: HTMLInputElement;
+	LastNameInput: HTMLInputElement;
+	TeamSelect: Select = new Select();
+	protected Update: (arg: AdminMember) => Promise<unknown>;
+	protected Delete: (arg: AdminMember) => Promise<unknown>;
+
+	constructor(card: HTMLElement, updateM: (arg: AdminMember) => Promise<unknown>, deleteM: (arg: AdminMember) => Promise<unknown>) {
+		super(card);
+
+		this.FirstNameInput = card.querySelector("input.FirstName")!;
+		this.LastNameInput = card.querySelector("input.LastName")!;
+
+		this.Data = new MemberBaseData(card, updateM, this, this.FirstNameInput, this.LastNameInput);
+		this.Update = updateM;
+		this.Delete = deleteM;
+
+		const teamWrapper = card.querySelector(".TeamWrapper");
+
+		if (teamWrapper) {
+			this.TeamSelect.ID = GetAttributeId(card, "TeamID").values().next().value ?? 0;
+			this.TeamSelect.Update = () => {
+				this.Update(this);
+			};
+			teamWrapper.appendChild(this.TeamSelect.Element);
+		}
+
+		const teamLink = HubFactory.GetInstance(AdminTeamLinkHub);
+		teamLink.RegAdd((item) => {
+			this.TeamSelect.AddOption(item.CreateOption());
+		});
+	}
+
+	set TeamID(id: number) {
+		this.TeamSelect!;
+	}
+
+	protected ExtendConfirmBefore = (): boolean => {
+		if (this.FirstNameInput.value == "" && this.LastNameInput.value == "") return false;
+
+		this.Data.FirstName = this.FirstNameInput.value;
+		this.Data.LastName = this.LastNameInput.value;
+
+		return true;
+	};
+
+	protected ItemInstance = () => {
+		return this;
+	};
+}
+
+export class Member extends BaseItem {
+	Data: MemberBaseData<Member>;
+
+	constructor(card: HTMLElement, update: (arg: Member) => Promise<unknown>) {
+		super(card);
+		this.Data = new MemberBaseData(card, update, this);
 	}
 }

@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using Razor.Templating.Core;
-using Sportdag_Terschuur.Pages.Templates.Admin;
-using System.Diagnostics;
+using System.Data;
 
 namespace Sportdag_Terschuur.Classes
 {
@@ -16,22 +14,72 @@ namespace Sportdag_Terschuur.Classes
         public IHttpContextAccessor HTTPContext = _httpContextAccessor;
         public async Task<bool> Connect()
         {
-            if (HTTPContext.HttpContext == null || HTTPContext.HttpContext.Session == null) return false;
-            int? role = HTTPContext.HttpContext.Session.GetInt32("Role");
-            if (role == null) return false;
-            if ((int)Roles.admin == role) await Groups.AddToGroupAsync(Context.ConnectionId, Convert.ToString(Roles.admin)!);
-            if ((int)Roles.user == role) await Groups.AddToGroupAsync(Context.ConnectionId, Convert.ToString(Roles.user)!);
-            return true;
+            Dictionary<Roles, string> roles = new()
+            {
+                { Roles.admin, nameof(Roles.admin)},
+                { Roles.user, nameof(Roles.user)},
+            };
+
+            foreach (var role in roles)
+            {
+                if (CheckRole(role.Key)) { await Groups.AddToGroupAsync(Context.ConnectionId, nameof(Roles.admin)!); return true; };
+            }
+            return false;
         }
 
-        public bool CheckRole(Roles role)
+        public bool CheckRole(Roles role) =>
+             (Roles?)HTTPContext.HttpContext?.Session.GetInt32("Role") == role;
+
+        protected bool IsAdmin() => CheckRole(Roles.admin);
+        protected bool IsUser() => CheckRole(Roles.user);
+
+        protected async Task<object> HandleCreate<T>(Func<T> createFunc, Func<T, object> clientMessage)
         {
-            if (HTTPContext.HttpContext == null || HTTPContext.HttpContext.Session == null) return false;
+            if (!IsAdmin()) return new { Status = false };
 
-            Roles? user = (Roles?)HTTPContext.HttpContext.Session.GetInt32("Role");
-
-            return user != null && user == role;
+            T item = createFunc();
+            await Clients.All.SendAsync("Create", clientMessage(item));
+            return new { Status = true };
         }
+
+        protected async Task<object> HandleCreate<T>(Func<Task<T>> createFunc, Func<T, object> clientMessage)
+        {
+            if (!IsAdmin()) return new { Status = false };
+
+            T item = await createFunc();
+            await Clients.All.SendAsync("Create", clientMessage(item));
+            return new { Status = true };
+        }
+
+        protected async Task<object> HandleReview(Func<object> reviewFunc)
+        {
+            if (!IsAdmin() && !IsUser()) return new { Status = false };
+
+            await Clients.Caller.SendAsync("Review", reviewFunc());
+            return new { Status = true };
+        }
+
+        protected async Task<object> HandleUpdate<T>(Func<Task<T?>> updateFunc, Func<T, object> clientMessage)
+        {
+            if (IsAdmin()) return new { Status = false };
+
+            T? item = await updateFunc();
+            if (item == null) return new { Status = false };
+
+            await Clients.All.SendAsync("Update", clientMessage(item));
+            return new { Status = true };
+        }
+
+        protected async Task<object> HandleDelete(Func<int, Task<bool>> deleteFunc, int id)
+        {
+            bool result = await deleteFunc(id);
+            if (!result) return new { Status = false };
+
+            await Clients.All.SendAsync("Delete", new { ID = id });
+            return new { Status = false };
+        }
+
+        public record DeleteResult(bool Result);
     }
 
 
@@ -42,92 +90,70 @@ namespace Sportdag_Terschuur.Classes
 
     public class TeamHub(IHttpContextAccessor _httpContextAccessor, TeamService service) : SportdagHub(_httpContextAccessor)
     {
-        public async Task<object> Create(string name)
+        private static object CreateTeam(SDTeam team) => new
         {
-            if (CheckRole(Roles.admin))
+            team.ID,
+            team.Name,
+            SDUsers = team.SDUsers.Select(u => new
             {
-                SDTeam team = new();
-                try
-                {
-                    object result = service.Create(team, name);
-                    await service.Save();
-                    await Clients.Group(Convert.ToString(Roles.admin)!).SendAsync("ServerAdd", RazorTemplateEngine.RenderPartialAsync("/Pages/Templates/Admin/TeamCardTemplate.cshtml", new TeamCardTemplateModel() { Team = team }));
-                    return result;
-                }
-                catch
-                {
-                    return new { Status = false };
-                }
-            }
-            return new { Status = false };
-        }
+                u.ID,
+                u.Name
+            }).ToArray(),
+            SDTeamMembers = team.SDTeamMembers.Select(m => new
+            {
+                m.ID,
+                m.FirstName,
+                m.LastName
+            }).ToArray()
+        };
 
-        public async Task<object> Update(int teamID, string name)
-        {
-            if (CheckRole(Roles.admin))
-            {
-                await Clients.All.SendAsync("ServerUpdate", teamID, name);
-                return await service.Update(teamID, name);
-            }
-            return new { Status = false };
-        }
+        public async Task<object> Create(string name) =>
+            await HandleCreate(() => service.Create(name), CreateTeam);
 
-        public async Task<object> Delete(int id)
-        {
-            if (CheckRole(Roles.admin))
-            {
-                await Clients.All.SendAsync("ServerDelete", id);
-                return await service.Delete(id);
-            }
-            return new { Status = false };
-        }
+        public async Task<object> Review() =>
+            await HandleReview(service.Review);
+
+        public async Task<object> Update(int id, string name, int[] members, int[] users) =>
+            await HandleUpdate(() => service.Update(id, name, members, users), CreateTeam);
+
+        public async Task<object> AddMember(int teamID, int memberID) =>
+            await HandleUpdate(() => service.AddMember(teamID, memberID), CreateTeam);
+
+        public async Task<object> RemoveMember(int teamID, int memberID) =>
+            await HandleUpdate(() => service.RemoveMember(teamID, memberID), CreateTeam);
+
+        public async Task<object> AddUser(int teamID, int userID) =>
+            await HandleUpdate(() => service.AddUser(teamID, userID), CreateTeam);
+
+        public async Task<object> RemoveUser(int teamID, int userID) =>
+            await HandleUpdate(() => service.RemoveUser(teamID, userID), CreateTeam);
+
+        public async Task<object> Delete(int id) =>
+            await HandleDelete(service.Delete, id);
     }
 
     public class TrainerHub(IHttpContextAccessor _httpContextAccessor, TrainerService service) : SportdagHub(_httpContextAccessor)
     {
-        public async Task<object> Create(string name, byte role, int? teamID)
+        private static object CreateTrainer(SDUser user) => new
         {
-            Debug.WriteLine("");
-            Debug.WriteLine("create");
-            Debug.WriteLine("");
-            if (CheckRole(Roles.admin))
-            {
-                SDUser user = new();
-                try
-                {
-                    object result = await service.Create(user, name, role, teamID);
-                    await service.Save();
-                    await Clients.Group(Convert.ToString(Roles.admin)!).SendAsync("ServerAdd", RazorTemplateEngine.RenderPartialAsync("/Pages/Templates/Admin/TrainerCardTemplate.cshtml", new TrainerCardTemplateModel() { Trainer = user }));
-                    return result;
-                }
-                catch
-                {
-                    return new { Status = false };
-                }
-            }
+            user.ID,
+            user.Name,
+            user.Role,
+            user.SDTeam_ID,
+            SDTeam_Name = user.SDTeam?.Name
+        };
 
-            return new { Status = false };
-        }
+        public async Task<object> Create(string name, bool role, int? teamID) =>
+            await HandleCreate(async () => await service.Create(name, role, teamID), CreateTrainer);
 
-        public async Task<object> Update(int trainerID, string name, byte role, int? teamID)
-        {
-            if (CheckRole(Roles.admin))
-            {
-                await Clients.All.SendAsync("ServerUpdate", trainerID, name, role, teamID);
-                return await service.Update(trainerID, name, role, teamID);
-            }
-            return new { Status = false };
-        }
+        public async Task<object> Review() =>
+            await HandleReview(service.Review);
 
-        public async Task<object> Delete(int id)
-        {
-            if (CheckRole(Roles.admin))
-            {
-                await Clients.All.SendAsync("ServerDelete", id);
-                return await service.Delete(id);
-            }
-            return new { Status = false };
-        }
+        public async Task<object> Update(int id, string name, bool role, int? teamID) =>
+            await HandleUpdate(() => service.Update(id, name, role, teamID), CreateTrainer);
+
+        public async Task<object> Delete(int id) =>
+            await HandleDelete(service.Delete, id);
     }
 
     public class RoundHub(IHttpContextAccessor _httpContextAccessor) : SportdagHub(_httpContextAccessor)
@@ -137,48 +163,26 @@ namespace Sportdag_Terschuur.Classes
 
     public class MemberHub(IHttpContextAccessor _httpContextAccessor, TeamMemberService service) : SportdagHub(_httpContextAccessor)
     {
-        public async Task<object> Create(string firstName, string lastName, int? teamID)
+        private static object CreateMember(SDTeamMember member) => new
         {
-            if (CheckRole(Roles.admin))
-            {
-                SDTeamMember member = new();
-                object result = await service.Create(member, firstName, lastName, teamID);
-                Debug.WriteLine(result);
-                await service.Save();
-                await Clients.Group(Convert.ToString(Roles.admin)!).SendAsync("ServerAdd", RazorTemplateEngine.RenderPartialAsync("/Pages/Templates/Admin/MemberCardTemplate.cshtml", new MemberCardTemplateModel() { Member = member }));
-                //await Clients.Group(Convert.ToString(Roles.user)!).SendAsync("ServerAdd");
-                return result;
-            }
+            member.ID,
+            member.FirstName,
+            member.LastName,
+            member.Present,
+            member.SDTeam_ID,
+            SDTeam_Name = member.SDTeam?.Name
+        };
 
-            return new { Status = false };
-        }
+        public async Task<object> Create(string firstName, string lastName, int? teamID) =>
+            await HandleCreate(() => service.Create(firstName, lastName, teamID), CreateMember);
 
-        public async Task<object> Update(int memberID, bool present, string firstName, string lastName, int teamID)
-        {
-            int? userId = HTTPContext.HttpContext!.Session.GetInt32("IdUser");
-            SDUser? user = await service.FindUser(userId);
+        public async Task<object> Review() =>
+            await HandleReview(service.Review);
 
-            if (CheckRole(Roles.admin))
-            {
-                await Clients.All.SendAsync("ServerUpdate", memberID, present, firstName, lastName, teamID);
-                return await service.Update(memberID, teamID, firstName, lastName, present);
-            }
-            else if (CheckRole(Roles.user) && user != null && user.SDTeam_idTeam == teamID)
-            {
-                await Clients.All.SendAsync("ServerUpdate", memberID, present);
-                return await service.Update(memberID, present);
-            }
-            return new { Status = false };
-        }
+        public async Task<object> Update(int id, bool present, string firstName, string lastName, int teamID) =>
+            await HandleUpdate(() => service.Update(id, teamID, firstName, lastName, present), CreateMember);
 
-        public async Task<object> Delete(int memberID)
-        {
-            if (CheckRole(Roles.admin))
-            {
-                await Clients.All.SendAsync("ServerDelete", memberID);
-                return await service.Delete(memberID);
-            }
-            return new { Status = false };
-        }
+        public async Task<object> Delete(int id) =>
+            await HandleDelete(service.Delete, id);
     }
 }

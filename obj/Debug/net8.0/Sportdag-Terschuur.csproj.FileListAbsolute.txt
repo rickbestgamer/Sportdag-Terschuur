@@ -142,3 +142,4 @@ C:\Users\rickv\OneDrive\Documenten\Programming\Personal\Sportdag-Terschuur\Sport
 C:\Users\rickv\OneDrive\Documenten\Programming\Personal\Sportdag-Terschuur\Sportdag-Terschuur\Sportdag-Terschuur\obj\Debug\net8.0\Sportdag-Terschuur.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\rickv\OneDrive\Documenten\Programming\Personal\Sportdag-Terschuur\Sportdag-Terschuur\Sportdag-Terschuur\bin\Debug\net8.0\MySqlConnector.dll
 C:\Users\rickv\OneDrive\Documenten\Programming\Personal\Sportdag-Terschuur\Sportdag-Terschuur\Sportdag-Terschuur\bin\Debug\net8.0\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\rickv\OneDrive\Documenten\Programming\Personal\Sportdag-Terschuur\Sportdag-Terschuur\Sportdag-Terschuur\obj\Debug\net8.0\Sportdag-Terschuur.sourcelink.json

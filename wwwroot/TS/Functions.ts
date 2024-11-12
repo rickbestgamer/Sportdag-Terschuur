@@ -28,15 +28,15 @@ export class TypedEventEmitter<EventPayloads extends Record<string, any>> {
 	};
 }
 
-export function GetAttributeId(el: HTMLElement | HTMLElement[] | HTMLCollectionOf<HTMLElement>, attributeName: string): number[] {
+export function GetAttributeId(el: HTMLElement | HTMLElement[] | HTMLCollectionOf<HTMLElement>, attributeName: string): Set<number> {
 	el = el instanceof HTMLElement ? [el] : Array.from(el);
-	let ids: number[] = [];
+	let ids: Set<number> = new Set();
 
 	for (const element of el) {
 		const idsAttribute = element.getAttribute(attributeName);
 		element.removeAttribute(attributeName);
-		const idTeamMembers = idsAttribute?.startsWith("[") ? JSON.parse(idsAttribute) : idsAttribute ? [Number(idsAttribute)] : [];
-		ids.push(idTeamMembers);
+		const IDS: number[] = idsAttribute?.startsWith("[") ? JSON.parse(idsAttribute) : idsAttribute ? [Number(idsAttribute)] : [];
+		IDS.forEach((id) => ids.add(id));
 	}
 	return ids;
 }

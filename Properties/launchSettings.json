@@ -11,11 +11,13 @@
   "profiles": {
     "http": {
       "commandName": "Project",
-      "dotnetRunMessages": true,
+      "dotnetRunMessages": false,
       "launchBrowser": true,
-      "applicationUrl": "http://192.168.52.212:5205", //laptop site4all
-      //"applicationUrl": "http://192.168.178.242:5205", //laptop thuis
-      //"applicationUrl": "http://192.168.178.239:5205", //pc thuis
+      //"applicationUrl": "http://192.168.149.212:5205", //laptop hotspot
+      //"applicationUrl": "http://192.168.178.239:5205", //laptop thuis
+      //"applicationUrl": "http://192.168.0.141:5205", //laptop stefan
+      "applicationUrl": "http://192.168.178.242:5205", //pc thuis
+      //"applicationUrl": "http://10.6.141.41:5205", //pc NYP
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

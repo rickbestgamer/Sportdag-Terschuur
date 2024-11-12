@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Razor.Templating.Core;
 using Sportdag_Terschuur.Pages.Templates.Admin;
+using System.Net;
 
 namespace Sportdag_Terschuur.Classes
 {
@@ -8,15 +9,15 @@ namespace Sportdag_Terschuur.Classes
     {
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<SDActivity>().HasKey(a => a.IdActivity);
-            modelBuilder.Entity<SDTeam>().HasKey(t => t.IdTeam);
-            modelBuilder.Entity<SDUser>().HasKey(u => u.IdUser);
-            modelBuilder.Entity<SDUser>().HasOne(u => u.SDTeam).WithMany(t => t.SDUsers).HasForeignKey(u => u.SDTeam_idTeam);
-            modelBuilder.Entity<SDTeamMember>().HasKey(tm => tm.IdTeamMember);
-            modelBuilder.Entity<SDTeamMember>().HasOne(tm => tm.SDTeam).WithMany(t => t.SDTeamMembers).HasForeignKey(tm => tm.Team_IdTeam);
-            modelBuilder.Entity<SDRound>().HasKey(r => r.IdRound);
-            modelBuilder.Entity<SDRound>().HasOne(r => r.SDActivity).WithMany().HasForeignKey(r => r.SDActivity_IdActivity);
-            modelBuilder.Entity<SDRound>().HasOne(r => r.SDTeamMember).WithMany().HasForeignKey(r => r.SDTeamMember_IdTeamMember);
+            modelBuilder.Entity<SDActivity>().HasKey(a => a.ID);
+            modelBuilder.Entity<SDTeam>().HasKey(t => t.ID);
+            modelBuilder.Entity<SDUser>().HasKey(u => u.ID);
+            modelBuilder.Entity<SDUser>().HasOne(u => u.SDTeam).WithMany(t => t.SDUsers).HasForeignKey(u => u.SDTeam_ID);
+            modelBuilder.Entity<SDTeamMember>().HasKey(tm => tm.ID);
+            modelBuilder.Entity<SDTeamMember>().HasOne(tm => tm.SDTeam).WithMany(t => t.SDTeamMembers).HasForeignKey(tm => tm.SDTeam_ID);
+            modelBuilder.Entity<SDRound>().HasKey(r => r.ID);
+            modelBuilder.Entity<SDRound>().HasOne(r => r.SDActivity).WithMany().HasForeignKey(r => r.SDActivity_ID);
+            modelBuilder.Entity<SDRound>().HasOne(r => r.SDTeamMember).WithMany().HasForeignKey(r => r.SDTeamMember_ID);
         }
 
         public DbSet<SDTeam> SDTeam { get; set; }
@@ -27,22 +28,22 @@ namespace Sportdag_Terschuur.Classes
 
         public SDUser? CheckUser(string userName, string password)
         {
-            return SDUser.First(user => user.UserName == userName && user.UserPassword == Functions.HashPassword(password));
+            return SDUser.First(user => user.Name == userName && user.Password == Functions.HashPassword(password));
         }
 
         public async Task<SDTeam?> FindTeam(int? id)
         {
-            return await SDTeam.Include(t => t.SDUsers).Include(t => t.SDTeamMembers).FirstOrDefaultAsync(t => t.IdTeam == id);
+            return await SDTeam.Include(t => t.SDUsers).Include(t => t.SDTeamMembers).FirstOrDefaultAsync(t => t.ID == id);
         }
 
         public async Task<SDUser?> FindUser(int? id)
         {
-            return await SDUser.Include(u => u.SDTeam).FirstOrDefaultAsync(u => u.IdUser == id);
+            return await SDUser.Include(u => u.SDTeam).FirstOrDefaultAsync(u => u.ID == id);
         }
 
         public async Task<SDTeamMember?> FindMember(int? ID)
         {
-            return await SDTeamMember.Include(tm => tm.SDTeam).FirstOrDefaultAsync(tm => tm.IdTeamMember == ID);
+            return await SDTeamMember.Include(tm => tm.SDTeam).FirstOrDefaultAsync(tm => tm.ID == ID);
         }
 
         public async Task<object> CreateActivity(double X, double Y, string Label, byte Type)
@@ -51,7 +52,7 @@ namespace Sportdag_Terschuur.Classes
             SDActivity.Add(activity);
             await SetActivity(activity, X, Y, Label, Type);
             ActivityTemplateModel template = new() { Activity = activity };
-            return new { status = true, id = activity.IdActivity, element = RazorTemplateEngine.RenderPartialAsync("~/Templates/ActivityTemplate.cshtml", template) };
+            return new { status = true, id = activity.ID, element = RazorTemplateEngine.RenderPartialAsync("~/Templates/ActivityTemplate.cshtml", template) };
         }
 
         public async Task<object> UpdateActivity(double X, double Y, string Label, byte Type, int ID)
@@ -80,7 +81,7 @@ namespace Sportdag_Terschuur.Classes
         {
             activity.PointX = X;
             activity.PointY = Y;
-            activity.ActivityName = Label;
+            activity.Name = Label;
             activity.Type = Type;
             await SaveChangesAsync();
         }
@@ -88,149 +89,95 @@ namespace Sportdag_Terschuur.Classes
 
     public class SDTeam
     {
-        public int IdTeam { get; set; }
-        public string TeamName { get; set; } = string.Empty;
+        public int ID { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         public ICollection<SDUser> SDUsers { get; set; } = [];
         public ICollection<SDTeamMember> SDTeamMembers { get; set; } = [];
 
-        public void Set(string name)
+        public void Set(string name, int[] users, int[] members, SportdagDB db)
         {
-            TeamName = name;
-        }
-    }
+            Name = WebUtility.HtmlEncode(name);
 
-    public class TeamService(SportdagDB DB)
-    {
-        public object Create(SDTeam team, string name)
-        {
-            DB.SDTeam.Add(team);
-            team.Set(name);
-            return new { Status = true };
+            SetUsers(users, db);
+            SetMembers(members, db);
         }
 
-        public async Task<object> Update(int teamID, string name)
+        public void SetUsers(int[] userIDs, SportdagDB db)
         {
-            SDTeam? team = await DB.FindTeam(teamID);
-
-            if (team == null) return new { Status = false };
-
-            team.Set(name);
-
-            await DB.SaveChangesAsync();
-
-            return new { Status = true };
-        }
-
-        public async Task<object> Delete(int id)
-        {
-            SDTeam? team = await DB.FindTeam(id);
-
-            if (team == null) return new { Status = false };
-
-            foreach (SDTeamMember member in team.SDTeamMembers)
+            HashSet<int> users = new(userIDs);
+            var Targets = db.SDUser.Where(u => users.Contains(u.ID)).ToList();
+            var Remove = SDUsers.Where(u => !users.Contains(u.ID)).ToList();
+            foreach (var user in Remove)
             {
-                member.SDTeam = null;
+                SDUsers.Remove(user);
             }
-
-            foreach (SDUser member in team.SDUsers)
+            HashSet<int> existingMembers = SDUsers.Select(m => m.ID).ToHashSet();
+            foreach (var user in Targets)
             {
-                member.SDTeam = null;
+                if (!existingMembers.Contains(user.ID))
+                {
+                    SDUsers.Add(user);
+                }
             }
-
-            DB.SDTeam.Remove(team);
-
-            await DB.SaveChangesAsync();
-
-            return new { Status = true };
         }
 
-        public async Task Save()
+        public void SetMembers(int[] memberIDs, SportdagDB db)
         {
-            await DB.SaveChangesAsync();
+            HashSet<int> members = new(memberIDs);
+            var Targets = db.SDTeamMember.Where(m => members.Contains(m.ID)).ToList();
+            var Remove = SDTeamMembers.Where(m => !members.Contains(m.ID)).ToList();
+            foreach (var member in Remove)
+            {
+                SDTeamMembers.Remove(member);
+            }
+            HashSet<int> existingMembers = SDTeamMembers.Select(m => m.ID).ToHashSet();
+            foreach (var member in Targets)
+            {
+                if (!existingMembers.Contains(member.ID))
+                {
+                    SDTeamMembers.Add(member);
+                }
+            }
         }
+
     }
 
     public class SDUser
     {
-        public int IdUser { get; set; }
-        public string UserName { get; set; } = string.Empty;
-        public string UserPassword { get; set; } = string.Empty;
-        public byte Role { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+        public bool Role { get; set; }
 
-        public int? SDTeam_idTeam { get; set; }
+        public int? SDTeam_ID { get; set; }
         public SDTeam? SDTeam { get; set; }
 
-        public void Set(string userName, byte role, SDTeam? team)
+        public async Task Set(string userName, bool role, int? team, SportdagDB db)
         {
-            UserName = userName;
-            UserPassword = Functions.HashPassword(userName);
+            Name = WebUtility.HtmlEncode(userName);
+            Password = Functions.HashPassword(userName);
             Role = role;
-            SDTeam = team;
-        }
-    }
-
-    public class TrainerService(SportdagDB DB)
-    {
-        public async Task<object> Create(SDUser user, string name, byte role, int? teamID)
-        {
-            SDTeam? team = await DB.FindTeam(teamID);
-
-            DB.SDUser.Add(user);
-            user.Set(name, role, team);
-            return new { Status = true };
-        }
-
-        public async Task<object> Update(int userID, string name, byte role, int? teamID)
-        {
-            SDUser? user = await DB.SDUser.Include(u => u.SDTeam).FirstOrDefaultAsync(u => u.IdUser == userID);
-
-            if (user == null) return new { Status = false };
-
-            SDTeam? team = await DB.FindTeam(teamID);
-
-            user.Set(name, role, team);
-
-            await DB.SaveChangesAsync();
-
-            return new { Status = true };
-        }
-
-        public async Task<object> Delete(int id)
-        {
-            SDUser? user = await DB.FindUser(id);
-
-            if (user == null) return new { Status = false };
-
-            DB.SDUser.Remove(user);
-
-            await DB.SaveChangesAsync();
-
-            return new { Status = true };
-        }
-
-        public async Task Save()
-        {
-            await DB.SaveChangesAsync();
+            SDTeam = await db.FindTeam(team);
         }
     }
 
     public class SDTeamMember
     {
-        public int IdTeamMember { get; set; }
+        public int ID { get; set; }
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public bool Present { get; set; }
 
-        public int? Team_IdTeam { get; set; }
+        public int? SDTeam_ID { get; set; }
         public SDTeam? SDTeam { get; set; }
 
-        public void Set(string firstName, string lastName, bool present, SDTeam? team)
+        public async Task Set(string firstName, string lastName, bool present, int? team, SportdagDB db)
         {
-            FirstName = firstName;
-            LastName = lastName;
+            FirstName = WebUtility.HtmlEncode(firstName);
+            LastName = WebUtility.HtmlEncode(lastName);
             Present = present;
-            SDTeam = team;
+            SDTeam = await db.FindTeam(team);
         }
 
         public void Set(bool present)
@@ -239,71 +186,10 @@ namespace Sportdag_Terschuur.Classes
         }
     }
 
-    public class TeamMemberService(SportdagDB DB)
-    {
-        public async Task<object> Create(SDTeamMember member, string firstName, string lastName, int? teamID)
-        {
-            SDTeam? team = await DB.FindTeam(teamID);
-
-            DB.SDTeamMember.Add(member);
-            member.Set(firstName, lastName, true, team);
-
-            return new { Status = true };
-        }
-
-        public async Task<object> Update(int memberID, int teamID, string firstName, string lastName, bool present)
-        {
-            SDTeamMember? member = await DB.SDTeamMember.Include(m => m.SDTeam).FirstOrDefaultAsync(m => m.IdTeamMember == memberID);
-
-            if (member == null) return new { Status = false };
-
-            SDTeam? team = await DB.FindTeam(teamID);
-
-            member.Set(firstName, lastName, present, team);
-
-            await DB.SaveChangesAsync();
-
-            return new { Status = true };
-        }
-
-        public async Task<object> Update(int memberID, bool present)
-        {
-            SDTeamMember? member = await DB.FindMember(memberID);
-
-            if (member == null) return new { Status = false };
-
-            member.Set(present);
-            await DB.SaveChangesAsync();
-            return new { Status = true };
-        }
-
-        public async Task<object> Delete(int memberID)
-        {
-            SDTeamMember? member = await DB.FindMember(memberID);
-
-            if (member == null) return new { Status = false };
-
-            DB.SDTeamMember.Remove(member);
-
-            await DB.SaveChangesAsync();
-            return new { Status = true };
-        }
-
-        public async Task Save()
-        {
-            await DB.SaveChangesAsync();
-        }
-
-        public async Task<SDUser?> FindUser(int? id)
-        {
-            return await DB.FindUser(id);
-        }
-    }
-
     public class SDActivity
     {
-        public int IdActivity { get; set; }
-        public string ActivityName { get; set; } = string.Empty;
+        public int ID { get; set; }
+        public string Name { get; set; } = string.Empty;
         public byte Type { get; set; }
         public double? PointX { get; set; }
         public double? PointY { get; set; }
@@ -311,13 +197,13 @@ namespace Sportdag_Terschuur.Classes
 
     public class SDRound
     {
-        public int IdRound { get; set; }
-        public byte RoundNumber { get; set; }
+        public int ID { get; set; }
+        public byte Number { get; set; }
         public int? Point { get; set; }
         public TimeSpan? Time { get; set; }
 
-        public int SDActivity_IdActivity { get; set; }
-        public int SDTeamMember_IdTeamMember { get; set; }
+        public int SDActivity_ID { get; set; }
+        public int SDTeamMember_ID { get; set; }
         public required SDActivity SDActivity { get; set; }
         public required SDTeamMember SDTeamMember { get; set; }
     }

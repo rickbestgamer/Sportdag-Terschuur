@@ -17,13 +17,14 @@
         const UpdateFetchPath = "@Url.Page("/Admin", "UpdateActivity")"
     </script>
     <script src="~/JS/Field.js" type="text/javascript" asp-append-version="true" defer></script>
-    <script src="~/JS/Admin.js" type="text/javascript" asp-append-version="true" defer></script>
+    @* <script src="~/JS/Admin.js" type="text/javascript" asp-append-version="true" defer></script> *@
+    <script src="~/JS/NewAdmin.js" type="text/javascript" asp-append-version="true" defer></script>
     <script src="~/JS/ScrollText.js" type="text/javascript" asp-append-version="true" defer></script>
 }
 
 <div id="MainSelector">
-    <input id="ActivitiesCardSelector" name="cards" type="radio" checked>
-    <input id="TeamsCardSelector" name="cards" type="radio">
+    <input id="ActivitiesCardSelector" name="cards" type="radio">
+    <input id="TeamsCardSelector" name="cards" type="radio" checked>
     <input id="MembersCardSelector" name="cards" type="radio">
     <input id="TrainersCardSelector" name="cards" type="radio">
 
@@ -50,9 +51,9 @@
             <div id="FieldWrapper">
                 <canvas id="FieldCanvas"></canvas>
                 @* <img src="~/IMG/Field.png" /> *@
-                @foreach (var activity in Model.Activities)
+                @* @foreach (var activity in Model.Activities)
                 {
-                }
+                } *@
                 <div id="MapAddWrapper">
                     <div id="MapAddButton">
                         <span class="Line Line1"></span>
@@ -89,10 +90,10 @@
                 </label>
 
                 <ul id="ActivityList">
-                    @foreach (var activity in Model.Activities)
+                    @* @foreach (var activity in Model.Activities)
                     {
                         @await Html.PartialAsync("Templates/Admin/ActivityTemplate", new ActivityTemplateModel() { Activity = activity })
-                    }
+                    } *@
                 </ul>
                 <div class="Background"></div>
             </div>
@@ -108,10 +109,10 @@
                 </label>
                 <button type="submit">Submit</button>
             </form>
-            @foreach (SDTeam team in Model.Teams)
+           @*  @foreach (SDTeam team in Model.Teams)
             {
                 @await Html.PartialAsync("Templates/Admin/TeamCardTemplate", new TeamCardTemplateModel() { Team = team})
-            }
+            } *@
         </div>
     </div>
 
@@ -126,15 +127,14 @@
                     <label for="NewMemberLast">LastName</label>
                     <input id="NewMemberLast" type="text" />
                 </label>
-                <select class="Team">
-                    <option value="0"></option>
-                </select>
+                <div class="TeamWrapper">
+                </div>
                 <button type="submit">Submit</button>
             </form>
-            @foreach (SDTeamMember member in Model.Members)
+            @* @foreach (SDTeamMember member in Model.Members)
             {
                 @await Html.PartialAsync("Templates/Admin/MemberCardTemplate", new MemberCardTemplateModel { Member = member })
-            }
+            } *@
         </div>
     </div>
 
@@ -145,20 +145,19 @@
                     <label for="NewTrainerName">Name</label>
                     <input id="NewTrainerName" type="text" />
                 </label>
-                <select class="Team">
-                    <option value="0"></option>
-                </select>
+                <div class="TeamWrapper">
+                </div>
                 <label for="NewRole">
                     <label for="NewRole">Admin</label>
                     <input id="NewRole" type="checkbox" />
                 </label>
                 <button type="submit">Submit</button>
             </form>
-            @foreach (SDUser trainer in Model.Users)
+            @* @foreach (SDUser trainer in Model.Users)
             {
-                tTeam = Model.Teams.FirstOrDefault(t => t.IdTeam == trainer.SDTeam_idTeam);
+                tTeam = Model.Teams.FirstOrDefault(t => t.ID == trainer.SDTeam_ID);
                 @await Html.PartialAsync("Templates/Admin/TrainerCardTemplate", new TrainerCardTemplateModel { Trainer = trainer })
-            }
+            } *@
         </div>
     </div>
 </div>

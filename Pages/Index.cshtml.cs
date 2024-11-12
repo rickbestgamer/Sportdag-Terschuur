@@ -25,11 +25,11 @@ namespace Sportdag_Terschuur.Pages
             {
                 Expires = DateTime.Now.AddYears(10)
             };
-            Response.Cookies.Append("Name", user.UserName, cookie);
-            Response.Cookies.Append("Password", user.UserPassword, cookie);
+            Response.Cookies.Append("Name", user.Name, cookie);
+            Response.Cookies.Append("Password", user.Password, cookie);
 
-            HttpContext.Session.SetInt32("Role", user.Role);
-            HttpContext.Session.SetInt32("IdUser", user.IdUser);
+            HttpContext.Session.SetInt32("Role", user.Role ? 0 : 1);
+            HttpContext.Session.SetInt32("IdUser", user.ID);
 
             return RedirectToPage("Admin");
         }

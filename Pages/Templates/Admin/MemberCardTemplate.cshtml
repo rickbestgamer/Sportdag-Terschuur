@@ -1,16 +1,19 @@
 ﻿@model MemberCardTemplateModel
 
-<div class="MemberCard" ID="@Model.Member.IdTeamMember" TeamID="@Model.Member.SDTeam?.IdTeam" FirstName="@Model.Member.FirstName" LastName="@Model.Member.LastName">
-    <h2><span class="FirstName"></span> <span class="LastName"></span><input type="text" class="FirstName"/> <input type="text" class="LastName"/></h2>
+<div class="MemberCard" ID="@Model.Member.ID" TeamID="@Model.Member.SDTeam?.ID" FirstName="@Model.Member.FirstName" LastName="@Model.Member.LastName">
+    <h2><span class="FirstName"></span> <span class="LastName"></span><input type="text" class="FirstName" /> <input type="text" class="LastName" /></h2>
     <button class="EditButton">Edit</button>
-    @if (Model.Member.Present)
-    {
-        <input class="Present" type="checkbox" checked />
-    }
-    else
-    {
-        <input class="Present" type="checkbox" />
-    }
-    <div class="SelectWrapper"></div>
+    <label for="@Model.Member.Present+Present">
+        <label for="@Model.Member.Present+Present">Present</label>
+        @if (Model.Member.Present)
+        {
+            <input id="@Model.Member.Present+Present" class="Present" type="checkbox" checked />
+        }
+        else
+        {
+            <input id="@Model.Member.Present+Present" class="Present" type="checkbox" />
+        }
+    </label>
+    <div class="TeamWrapper"></div>
     <button class="DeleteButton">Delete</button>
 </div>

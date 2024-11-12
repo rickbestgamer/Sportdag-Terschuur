@@ -1,14 +1,14 @@
 ﻿@using Sportdag_Terschuur.Classes;
 @model TeamCardTemplateModel;
 
-<div class="TeamCard" ID="@Model.Team.IdTeam" LeaderID="@Json.Serialize(Model.Team.SDUsers.Select(m=>m.IdUser).ToList())" MemberID="@Json.Serialize(Model.Team.SDTeamMembers.Select(m=>m.IdTeamMember).ToList())" Name="@Model.Team.TeamName">
-    <h2><span class="TeamName"></span><input type="text" class="TeamName" value="@Model.Team.TeamName" /></h2>
+<div class="TeamCard" ID="@Model.Team.ID" Name="@Model.Team.Name">
+    <h2><span class="TeamName"></span><input type="text" class="TeamName" value="" /></h2>
     <button class="EditButton">Edit</button>
     <h4>Leaders</h4>
-    <div class="TeamLeader">
+    <div class="LeaderWrapper" IDs="@Json.Serialize(Model.Team.SDUsers.Select(m=>m.ID).ToList())">
     </div>
     <h4>Members</h4>
-    <div class="TeamMember">
+    <div class="MemberWrapper" IDs="@Json.Serialize(Model.Team.SDTeamMembers.Select(m=>m.ID).ToList())">
     </div>
     <button class="DeleteButton">Delete</button>
 </div>
